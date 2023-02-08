@@ -1,5 +1,5 @@
 // Importeer express uit de node_modules map
-import express from 'express'
+import express, { response } from 'express'
 
 // Maak een nieuwe express app aan
 const app = express()
@@ -11,10 +11,15 @@ app.set('views', './views')
 // Gebruik de map 'public' voor statische resources
 app.use(express.static('public'))
 
+const url = ('https://whois.fdnd.nl/api/v1/member/duneya-doen')
+const data = await fetch (url).then((response) => response.json())
+fetch(url)  
+.then((response) => response.json())  .then((data) => console.log(data));
+
 // Maak een route voor de index
 app.get('/', function (req, res) {
   // res.send('Hello World!')
-  res.render('index')
+  res.render('index', data)
 })
 
 // Stel het poortnummer in waar express op gaat luisteren
@@ -25,3 +30,7 @@ app.listen(app.get('port'), function () {
   // Toon een bericht in de console en geef het poortnummer door
   console.log(`Application started on http://localhost:${app.get('port')}`)
 })
+
+
+
+
